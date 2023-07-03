@@ -1,6 +1,10 @@
 name: todo-github-actions
 run-name: ${{ github.actor}} is runing the workflow now
-on : [push]
+on: 
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
