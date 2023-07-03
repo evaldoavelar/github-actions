@@ -27,7 +27,7 @@ namespace TodoTests.IntegratedTests
         public static IEnumerable<Object[]> GetValidTodos => new List<Object[]>(){
            new object[]{ new Todo() { Title = "Teste1", Description = "Teste Description 1" }},
            new object[]{ new Todo() { Title = "Teste2", Description = "Teste Description 2" }},
-           new object[]{ new Todo() {  Description = "Teste Description 3" }}
+           new object[]{ new Todo() { Title = "Teste3", Description = "Teste Description 3" }}
         };
 
         public static IEnumerable<Object[]> GetInvalidsTodos => new List<Object[]>(){
