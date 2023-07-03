@@ -19,4 +19,4 @@ jobs:
       - name: Build with dotnet 
         run: dotnet build --no-restore --configuration Release
       - name: Test with dotnet
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --no-restore --verbosity quiet
