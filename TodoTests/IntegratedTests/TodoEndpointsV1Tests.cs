@@ -132,5 +132,23 @@ namespace TodoTests.IntegratedTests
             });
 
         }
+
+        [Theory]
+        [MemberData(nameof(GetValidTodo))]
+        public async void UpdateTodo(Todo todo)
+        {
+            // Given
+            SaveTodo(todo);
+            // When
+            todo.Title = "Updated Title";
+            var result = await _httpClient.PutAsJsonAsync($"/todo", todo);
+            // Then
+            var todoAPI = await result.Content.ReadFromJsonAsync<Todo>();
+            Assert.True(result.IsSuccessStatusCode);
+            Assert.NotNull(todoAPI);
+            Assert.Equal(todo.Title, todoAPI?.Title);
+            
+        }
+
     }
 }

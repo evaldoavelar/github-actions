@@ -16,7 +16,7 @@ public class Program
 
         app.MapPost("/todo", (Todo todo, TodoDbContext db) =>
         {
-            // Save todo to the database
+            // Save to the database
             db.Todos.Add(todo);
             db.SaveChanges();
             return Results.Created($"/todo/{todo.Id}", todo);
@@ -33,6 +33,19 @@ public class Program
                 Results.NotFound()
         );
 
+        app.MapPut("/todo", async ( Todo input, TodoDbContext db) =>
+        {
+            var todo = await db.Todos.FindAsync(input.Id);
+            if (todo is null)
+            {
+                return Results.NotFound();
+            }
+
+            todo.Title = input.Title;
+            todo.Description = input.Description ;
+            await db.SaveChangesAsync();
+            return Results.Ok(todo);
+        });
 
         app.Run();
     }
