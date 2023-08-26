@@ -6,7 +6,8 @@ namespace TodoAPI;
 
 public class Program
 {
-   public static void Main(string[] args)
+    protected Program() { }
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatabase("TodoDb"));
@@ -33,7 +34,7 @@ public class Program
                 Results.NotFound()
         );
 
-        app.MapPut("/todo", async ( Todo input, TodoDbContext db) =>
+        app.MapPut("/todo", async (Todo input, TodoDbContext db) =>
         {
             var todo = await db.Todos.FindAsync(input.Id);
             if (todo is null)
@@ -42,7 +43,7 @@ public class Program
             }
 
             todo.Title = input.Title;
-            todo.Description = input.Description ;
+            todo.Description = input.Description;
             await db.SaveChangesAsync();
             return Results.Ok(todo);
         });

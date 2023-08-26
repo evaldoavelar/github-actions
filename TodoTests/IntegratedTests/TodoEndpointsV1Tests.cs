@@ -150,5 +150,19 @@ namespace TodoTests.IntegratedTests
             
         }
 
+        [Theory]
+        [MemberData(nameof(GetValidTodo))]
+        public async void TryUpdateNonExistentTodo(Todo todo)
+        {         
+            // When
+            todo.Title = "Updated Title";
+            var result = await _httpClient.PutAsJsonAsync($"/todo", todo);
+            
+            // Then
+            Assert.False(result.IsSuccessStatusCode);
+            Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+            
+        }
+
     }
 }

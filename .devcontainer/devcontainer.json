@@ -7,7 +7,10 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-dotnettools.csdevkit"
+				"ms-dotnettools.csdevkit",
+				"ms-dotnettools.csharp",
+				"GitHub.copilot",
+				"eamodio.gitlens"
 			]
 		}
 	},
@@ -17,7 +20,7 @@
 		"ghcr.io/devcontainers/features/java:1": {
 			"jdkVersion": "17"
 		}
-	}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
@@ -28,7 +31,7 @@
 	// }
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore",
+   "postCreateCommand": ["dotnet tool install --global dotnet-coverage", "dotnet tool install --global dotnet-reportgenerator-globaltool" ]
 
 	// Configure tool-specific properties.
 	// "customizations": {},
